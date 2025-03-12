@@ -1,6 +1,7 @@
-import { View, Text } from "react-native";
+import { View, Text, Button, Alert, Image } from "react-native";
+import SectionItem from "./section_item";
 
-function Section() {
+function Section({ titleBtn, vImage, title, nameEvent, date, local }) {
   return (
     <View
       style={{
@@ -13,12 +14,11 @@ function Section() {
           fontWeight: "bold",
         }}
       >
-        Header
+        {title}
       </Text>
       <View
         style={{
           marginTop: 5,
-          height: 100,
           backgroundColor: "#ffffff",
           borderRadius: 10,
         }}
@@ -28,15 +28,26 @@ function Section() {
             padding: 10,
           }}
         >
-          <Text
-            style={{
-              fontSize: 10,
-              color: "#736f6f",
-            }}
-          >
-            Tên Sự Kiện
-          </Text>
-          <Text>Bắn Pháo Hoa</Text>
+          <SectionItem title="Tên Sự Kiện" value={nameEvent} />
+          <SectionItem title="Ngày diễn ra" value={date} />
+          <SectionItem title="Địa điểm" value={local} />
+
+          {titleBtn && (
+            <Button
+              title="Chi tiết"
+              onPress={() => Alert.alert("Simple Button pressed")}
+            />
+          )}
+
+          {vImage && (
+            <Image
+              style={{
+                width: "100%",
+                height: 100,
+              }}
+              source={vImage}
+            />
+          )}
         </View>
       </View>
     </View>
