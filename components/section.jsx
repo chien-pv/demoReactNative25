@@ -1,7 +1,19 @@
 import { View, Text, Button, Alert, Image } from "react-native";
 import SectionItem from "./section_item";
+import { memo, useContext } from "react";
+import EventContext from "./context";
 
-function Section({ titleBtn, vImage, title, nameEvent, date, local }) {
+const Section = memo(function Section({
+  titleBtn,
+  vImage,
+  title,
+  nameEvent,
+  date,
+  local,
+}) {
+  console.log("Section");
+  const value = useContext(EventContext);
+  console.log(value);
   return (
     <View
       style={{
@@ -28,30 +40,13 @@ function Section({ titleBtn, vImage, title, nameEvent, date, local }) {
             padding: 10,
           }}
         >
-          <SectionItem title="Tên Sự Kiện" value={nameEvent} />
-          <SectionItem title="Ngày diễn ra" value={date} />
-          <SectionItem title="Địa điểm" value={local} />
-
-          {titleBtn && (
-            <Button
-              title="Chi tiết"
-              onPress={() => Alert.alert("Simple Button pressed")}
-            />
-          )}
-
-          {vImage && (
-            <Image
-              style={{
-                width: "100%",
-                height: 100,
-              }}
-              source={vImage}
-            />
-          )}
+          <SectionItem title="Tên Sự Kiện" value={value.nameEvent} />
+          <SectionItem title="Ngày diễn ra" value={value.date} />
+          <SectionItem title="Địa điểm" />
         </View>
       </View>
     </View>
   );
-}
+});
 
 export default Section;
